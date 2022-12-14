@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang = "en">
+   <head></head>
+   <body>
+   <style>
+
+
+.apps-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+<!--td {white-space:pre-wrap; word-wrap:break-word}-->
+
+.apps-table thead tr {
+    background-color: #5072A7;
+    color: #ffffff;
+    text-align: left;
+}
+.apps-table th,
+.apps-table td {
+    padding: 12px 15px;
+}
+.apps-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.apps-table tbody tr:nth-of-type(even) {
+    background-color: #F0F8FF;
+}
+
+
+
+</style>
+<h3> Top {{n}} AppStore Apps</h3>
+<!--      <h3>-->
+<!--         <a href = "{{ url_for('show_all') }}"> Top 100 AppStore Applications </a>-->
+<!--      </h3>-->
+
+      <hr/>
+
+      <table class="apps-table">
+         <thead>
+            <tr>
+               <th>ID</th>
+               <th style="white-space:pre-wrap; word-wrap:break-word">Name</th>
+               <th>Rating</th>
+               <th>Number of rating</th>
+               <th>Seller</th>
+               <th>Size</th>
+               <th>Category</th>
+               <th>TV App</th>
+               <th>Photo App</th>
+               <th>Music App</th>
+               <th>Game App</th>
+               <th>Other</th>
+               <th>Kids Friendly</th>
+               <th>Min Age</th>
+               <th>Min iPhone Version</th>
+               <th>Min iPad Version</th>
+               <th>Min Mac Version</th>
+               <th>Subscriptions</th>
+               <th>Languages</th>
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for app in apps %}
+               <tr>
+                  <td>{{ app.id }}</td>
+                  <td style="white-space: nowrap;">{{ app.name }}</td>
+                  <td>{{ app.rating }}</td>
+                  <td>{{ app.number_of_rating }}</td>
+                  <td>{{ app.seller }}</td>
+                  <td>{{ app.size }}</td>
+                  <td>{{ app.category }}</td>
+                  <td>{{ +app.is_tv_app }}</td>
+                  <td>{{ +app.is_photo_app }}</td>
+                  <td>{{ +app.is_music_app }}</td>
+                  <td>{{ +app.is_game_app }}</td>
+                  <td>{{ app.other }}</td>
+                  <td>{{ +app.is_kids_friendly }}</td>
+                  <td>{{ app.min_age }}</td>
+                  <td>{{ app.min_iphone_version }}</td>
+                  <td>{{ app.min_ipad_version }}</td>
+                  <td>{{ app.min_mac_version }}</td>
+                  <td style="white-space: nowrap;">
+                     {% if app.weekly_sub %} Weekly: {{app.weekly_sub}} $ <br> {% endif %}
+                     {% if app.monthly_sub %} Monthly: {{app.monthly_sub}} $ <br> {% endif %}
+                     {% if app.yearly_sub %} Yearly: {{app.yearly_sub}} $ {% endif %}
+                  </td>
+                  <td style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;flex: 100; width: 500px">{{ app.languages}}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+   </body>
+</html>
